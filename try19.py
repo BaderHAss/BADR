@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 import sys
+
 # Constants
 DIFFICULTY_LEVELS = {
     "Easy": {"min_value": 1, "max_value": 10, "color": "#C1FF72"},
@@ -9,7 +10,6 @@ DIFFICULTY_LEVELS = {
 }
 SCORE_FILE = "scores.txt"
 
-# Class for a math question
 class MathQuestion:
     def __init__(self, difficulty):
         self.difficulty = difficulty
@@ -67,8 +67,6 @@ class MathGame:
         with open(SCORE_FILE, "a") as file:
             file.write(f"{self.player_name}: {self.score}\n")
 
-
-
 class EntryScreen:
     def __init__(self, root):
         self.root = root
@@ -90,17 +88,17 @@ class EntryScreen:
                 # Handle invalid age
                 return
             self.clear_widgets()
-            menu = MathGameGUI(self.root)
-            menu.start()
+            game_gui = MathGameGUI(self.root)
+            game_gui.start()
 
     def clear_widgets(self):
         self.age_label.pack_forget()
         self.age_entry.pack_forget()
         self.continue_button.pack_forget()
- # GUI class for the math game
+    
 class MathGameGUI:
-    def __init__(self):
-        self.root = tk.Tk()
+    def __init__(self, root):
+        self.root = root
         self.game = MathGame()
         self.root.title("Quiz Time")
         self.title_label = tk.Label(self.root, text="Quiz Time", font=("Helvetica", 20, "bold"))
@@ -122,14 +120,14 @@ class MathGameGUI:
         
         # Set initial background color
         self.root.configure(bg="#FF5757")
-    
+
     def start(self):
         self.root.geometry("600x400")
         self.title_label.pack(pady=10)
         self.difficulty_label.pack(pady=10)
         self.display_difficulty_buttons()
         self.root.mainloop()
-    
+
     def display_difficulty_buttons(self):
         for button in self.difficulty_buttons.values():
             button.pack(pady=5)
@@ -212,11 +210,11 @@ class MathGameGUI:
         self.game.current_question_index = 0
         self.is_first_question = True  # Reset the flag to True when starting a new game
         self.display_question()
-
+# Main program
 if __name__ == "__main__":
     root = tk.Tk()
     entry_screen = EntryScreen(root)
     entry_screen.start()
-    root.mainloop()  
-    game_gui = MathGameGUI()
-    game_gui.start()     
+    root.mainloop()
+
+
