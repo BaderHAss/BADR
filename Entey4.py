@@ -87,21 +87,28 @@ class EntryScreen:
 
     def show_menu(self):
         age = self.age_entry.get()
-        if age.isdigit():
-            age = int(age)
-            if age <= 4:
-                self.show_age_limit_message()
-                self.hide_invalid_age_message()  # Hide the invalid age message
-                return
-            elif age > 16:
-                self.show_invalid_age_message()
-                self.hide_age_limit_message()  # Hide the age limit message
-                return
-            self.clear_widgets()
-            self.hide_age_limit_message()
-            self.hide_invalid_age_message()
-            game_gui = MathGameGUI(self.root)
-            game_gui.start()
+        
+        if not age.isdigit():
+            self.show_invalid_age_message()
+            self.hide_age_limit_message()  # Hide the age limit message
+            return
+        
+        age = int(age)
+        
+        if age <= 4:
+            self.show_age_limit_message()
+            self.hide_invalid_age_message()  # Hide the invalid age message
+            return
+        elif age > 16:
+            self.show_invalid_age_message()
+            self.hide_age_limit_message()  # Hide the age limit message
+            return
+        
+        self.clear_widgets()
+        self.hide_age_limit_message()
+        self.hide_invalid_age_message()
+        game_gui = MathGameGUI(self.root)
+        game_gui.start()
 
     def show_invalid_age_message(self):
         self.invalid_age_label.pack(pady=10)
@@ -123,6 +130,8 @@ class EntryScreen:
         self.age_label.pack_forget()
         self.age_entry.pack_forget()
         self.continue_button.pack_forget()
+
+
     
 class MathGameGUI:
     def __init__(self, root):
@@ -153,8 +162,8 @@ class MathGameGUI:
         self.root.geometry("600x400")
         self.title_label = tk.Label(self.root, text="Quiz Time", font=("Helvetica", 20, "bold"), bg=self.root.cget("bg"))
         self.title_label.pack(pady=10)
-        self.info_box = tk.Label(self.root, text="Challenge your math skills with this multiple choices math quiz", font=("Helvetica", 14), bg="white")
-        self.info_box.pack(fill="x", padx=10, pady=5)
+        self.info_box = tk.Label(self.root, text="Challenge your math skills with this multiple choices math quiz", font=("Helvetica", 14), bg="white", wraplength=200)
+        self.info_box.pack(fill="x", padx=200, pady=5) 
         self.difficulty_label.pack(pady=10)
         self.display_difficulty_buttons()
         self.root.mainloop()
@@ -246,6 +255,9 @@ class MathGameGUI:
 # Main program
 if __name__ == "__main__":
     root = tk.Tk()
+    root.wm_state('zoomed')
+    root.wm_attributes('-fullscreen', False)
+    root.wm_attributes('-topmost', True)
     entry_screen = EntryScreen(root)
     entry_screen.start()
     root.mainloop()
