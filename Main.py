@@ -9,7 +9,7 @@ DIFFICULTY_LEVELS = {
     "Medium": {"min_value": 10, "max_value": 50, "color": "#FFDE59"},
     "Hard": {"min_value": 50, "max_value": 100, "color": "#5CE1E6"}
 }
-
+SCORE_FILE = "scores.txt"
 
 class MathQuestion:
     def __init__(self, difficulty):
