@@ -210,15 +210,15 @@ class MathGameGUI:
         question = self.game.get_current_question()
         question_number = self.game.current_question_index + 1
         question_text = f"Question number {question_number}: {question.get_question()}"
-        self.question_label = tk.Label(self.root, text=question_text, font=("Helvetica", 24))
+        self.question_label = tk.Label(self.root, text=question_text, font=("Helvetica", 30))
         self.question_label.pack(pady=10)
         
         choices = question.get_choices()
         self.choices_buttons = []
         for i in range(4):
-            button = tk.Button(self.root, text=str(choices[i]), command=lambda i=i: self.check_answer_and_next(i), font=("Helvetica", 20))
+            button = tk.Button(self.root, text=str(choices[i]), command=lambda i=i: self.check_answer_and_next(i), font=("Helvetica", 24))
             self.choices_buttons.append(button)
-            button.pack(pady=5)
+            button.pack(pady=10)
         
         self.next_button = tk.Button(self.root, text="Skip", command=self.next_question, font=("Helvetica", 24))
         self.next_button.pack(pady=2, padx=20, side="right")
