@@ -9,7 +9,7 @@ DIFFICULTY_LEVELS = {
     "Medium": {"min_value": 10, "max_value": 50, "color": "#FFDE59"},
     "Hard": {"min_value": 50, "max_value": 100, "color": "#5CE1E6"}
 }
-SCORE_FILE = "scores.txt"
+
 
 class MathQuestion:
     def __init__(self, difficulty):
@@ -67,7 +67,7 @@ class MathGame:
     def save_score(self):
         with open(SCORE_FILE, "a") as file:
             file.write(f"{self.player_name}: {self.score}\n")
-
+# Class for the Entry screen
 class EntryScreen:
     def __init__(self, root):
         self.root = root
@@ -94,7 +94,7 @@ class EntryScreen:
 
     def show_menu(self):
         age = self.age_entry.get()
-        
+    
         if not age.isdigit():
             self.show_invalid_age_message()
             self.hide_age_limit_message()  # Hide the age limit message
